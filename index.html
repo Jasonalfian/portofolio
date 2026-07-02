@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jason Alfian Hartanto — Software Engineer</title>
+<meta name="description" content="Software engineer with 5+ years building trading, payments, and internal tooling at Pintu and OY! Indonesia.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%231a1a1a'/%3E%3Ctext x='32' y='45' font-family='Georgia,%20Times%20New%20Roman,%20serif' font-size='36' fill='%23ffffff' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --color-cream-paper:#ffffeb;
+    --color-midnight-ink:#1a1a1a;
+    --color-white:#ffffff;
+    --color-stone-mist:#e4e4d0;
+    --color-graphite-veil:#8a8a80;
+    --color-smoke:#5f5f59;
+    --color-charcoal:#222222;
+    --color-charcoal-mist:#333333;
+    --color-deep-forest-teal:#034f46;
+    --color-lavender-whisper:#f0d7ff;
+    --color-amber-pulse:#ffa946;
+
+    --font-figtree:'Figtree',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --font-eb-garamond:'EB Garamond',Georgia,'Times New Roman',serif;
+
+    --radius-lg:8px;
+    --radius-xl:14px;
+    --radius-3xl:32px;
+    --radius-3xl-2:40px;
+    --radius-full:1000px;
+
+    --page:1200px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-figtree);
+    background:var(--color-cream-paper);
+    color:var(--color-midnight-ink);
+    font-size:16px;
+    line-height:1.3;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block}
+
+  /* ---------- Layout primitives ---------- */
+  .band{width:100%;padding:96px 24px}
+  .band--cream{background:var(--color-cream-paper)}
+  .band--dark{background:var(--color-midnight-ink);color:var(--color-white)}
+  .band--teal{background:var(--color-deep-forest-teal);color:var(--color-white)}
+  .wrap{max-width:var(--page);margin:0 auto;width:100%}
+
+  .serif{font-family:var(--font-eb-garamond);font-weight:400;font-feature-settings:"liga" 1,"dlig" 1}
+
+  /* ---------- Eyebrow / badges ---------- */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--color-smoke);
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--color-amber-pulse);flex:none}
+  .band--dark .eyebrow,.band--teal .eyebrow{color:rgba(255,255,255,.7)}
+
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;
+    border-radius:var(--radius-full);
+    border:1px solid var(--color-graphite-veil);
+    padding:8px 14px;font-size:13px;font-weight:500;color:var(--color-midnight-ink);
+    background:transparent;
+  }
+  .badge--teal{background:var(--color-deep-forest-teal);border-color:var(--color-deep-forest-teal);color:#fff}
+  .band--dark .badge{border-color:var(--color-charcoal-mist);color:rgba(255,255,255,.85)}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-figtree);font-weight:600;font-size:15px;
+    border-radius:var(--radius-xl);padding:12px 20px;cursor:pointer;
+    border:1px solid transparent;transition:transform .18s ease,background .18s ease,color .18s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn--primary{background:var(--color-lavender-whisper);color:var(--color-midnight-ink);border-color:var(--color-midnight-ink)}
+  .btn--ghost{background:transparent;color:var(--color-midnight-ink);border-color:var(--color-midnight-ink)}
+  .band--dark .btn--ghost{color:#fff;border-color:rgba(255,255,255,.55)}
+  .band--dark .btn--ghost:hover{background:rgba(255,255,255,.08)}
+  .btn svg{width:16px;height:16px}
+
+  /* ---------- Nav ---------- */
+  header.nav-shell{position:sticky;top:16px;z-index:50;padding:0 24px;margin-top:16px}
+  nav{
+    max-width:var(--page);margin:0 auto;
+    background:var(--color-white);
+    border:1px solid var(--color-stone-mist);
+    border-radius:var(--radius-xl);
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 12px 10px 18px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px}
+  .brand .mark{
+    width:30px;height:30px;border-radius:9px;background:var(--color-midnight-ink);
+    display:flex;align-items:center;justify-content:center;color:#fff;
+    font-family:var(--font-eb-garamond);font-size:18px;line-height:1
+  }
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--color-midnight-ink);opacity:.85;transition:opacity .15s}
+  .nav-links a:hover{opacity:1}
+  .nav-cta{display:flex;gap:10px;align-items:center}
+  .nav-toggle{display:none}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;text-align:center;padding-top:80px;padding-bottom:80px}
+  .hero .wrap{position:relative;z-index:2}
+  .hero .eyebrow{margin-bottom:26px}
+  .hero h1{
+    font-family:var(--font-eb-garamond);font-weight:400;
+    font-size:clamp(44px,7.2vw,96px);line-height:.95;letter-spacing:-.04em;
+    max-width:16ch;margin:0 auto;
+  }
+  .hero h1 .muted{color:var(--color-graphite-veil)}
+  .hl{position:relative;white-space:nowrap;z-index:1}
+  .hl::after{
+    content:"";position:absolute;left:-4px;right:-4px;bottom:.1em;height:.28em;
+    background:var(--color-lavender-whisper);border-radius:4px;z-index:-1;
+  }
+  .hero p.lede{
+    font-size:19px;line-height:1.45;color:var(--color-smoke);
+    max-width:56ch;margin:28px auto 0;
+  }
+  .hero .actions{display:flex;gap:14px;justify-content:center;margin-top:38px;flex-wrap:wrap}
+  .hero .meta{
+    margin-top:34px;display:flex;gap:26px;justify-content:center;flex-wrap:wrap;
+    font-size:14px;color:var(--color-smoke)
+  }
+  .hero .meta b{color:var(--color-midnight-ink);font-weight:600}
+
+  /* decorative orbs */
+  .orb{position:absolute;pointer-events:none;z-index:1}
+  .orb--spin{top:60px;left:max(24px,calc(50% - 640px));width:150px;height:150px;opacity:.9}
+  .orb .ring-text{animation:spin 26s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ---------- Section heads ---------- */
+  .sec-head{max-width:var(--page);margin:0 auto 48px}
+  .sec-head h2{
+    font-family:var(--font-eb-garamond);font-weight:400;letter-spacing:-.03em;
+    font-size:clamp(34px,4.4vw,56px);line-height:1;margin-top:16px;max-width:20ch;
+  }
+  .sec-head p{margin-top:16px;color:var(--color-smoke);max-width:60ch;font-size:17px;line-height:1.45}
+  .band--dark .sec-head p{color:rgba(255,255,255,.7)}
+  .band--teal .sec-head p{color:rgba(255,255,255,.75)}
+
+  /* ---------- Experience ---------- */
+  .xp{display:flex;flex-direction:column;gap:24px}
+  .xp-card{
+    background:var(--color-charcoal);border:1px solid var(--color-charcoal-mist);
+    border-radius:var(--radius-3xl);padding:36px;
+    display:grid;grid-template-columns:270px 1fr;gap:40px;color:var(--color-white);
+  }
+  .xp-card .x-when{font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+  .xp-card h3{font-family:var(--font-eb-garamond);font-weight:400;font-size:30px;line-height:1.05;letter-spacing:-.02em;margin:10px 0 6px;color:#fff}
+  .xp-card h3 a{transition:color .15s}
+  .xp-card h3 a:hover{color:var(--color-amber-pulse)}
+  .xp-card h3 .ext{display:inline-block;font-family:var(--font-figtree);font-size:12px;color:rgba(255,255,255,.5);vertical-align:middle;margin-left:8px;transform:translateY(-2px)}
+  .xp-card h3 a:hover .ext{color:var(--color-amber-pulse)}
+  .xp-card .x-role{font-size:15px;font-weight:600;color:var(--color-amber-pulse)}
+  .xp-card .x-sector{font-size:13px;color:rgba(255,255,255,.5);margin-top:4px}
+  .xp-card ul{margin:14px 0 18px;padding:0}
+  .xp-card ul li{list-style:none;position:relative;padding-left:20px;font-size:15px;line-height:1.5;color:rgba(255,255,255,.8);padding-top:5px;padding-bottom:5px}
+  .xp-card ul li::before{content:"";position:absolute;left:0;top:13px;width:6px;height:6px;border-radius:50%;background:var(--color-amber-pulse)}
+  .xp-card ul li b{color:#fff;font-weight:600}
+  .stack{display:flex;flex-wrap:wrap;gap:7px}
+  .stack .t{font-size:12px;font-weight:500;color:rgba(255,255,255,.72);border:1px solid var(--color-charcoal-mist);border-radius:var(--radius-lg);padding:5px 10px;background:var(--color-midnight-ink)}
+
+  /* ---------- Teal clients ---------- */
+  .clients-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .client{
+    display:block;background:var(--color-deep-forest-teal);
+    border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-xl);overflow:hidden;
+    cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  }
+  .client:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.28);border-color:rgba(255,255,255,.35)}
+  .c-shot{aspect-ratio:4/3;overflow:hidden;background:#046056}
+  .c-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .35s ease}
+  .client:hover .c-shot img{transform:scale(1.045)}
+  .c-info{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 18px}
+  .client .cn{font-family:var(--font-eb-garamond);font-size:20px;line-height:1.05;color:#fff;transition:color .18s}
+  .client:hover .cn{color:var(--color-amber-pulse)}
+  .client .lk{font-size:14px;color:rgba(255,255,255,.7);opacity:0;transition:opacity .18s}
+  .client:hover .lk{opacity:1}
+
+  /* ---------- Skills + education ---------- */
+  .two-col{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;align-items:start}
+  .skill-group{margin-bottom:28px}
+  .skill-group h4{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--color-smoke);margin-bottom:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{border:1px solid var(--color-midnight-ink);border-radius:var(--radius-full);padding:9px 16px;font-size:14px;font-weight:500}
+  .chip--fill{background:var(--color-midnight-ink);color:#fff}
+  .edu-card{background:var(--color-white);border:1px solid var(--color-stone-mist);border-radius:var(--radius-3xl);padding:32px}
+  .edu-card h3{font-family:var(--font-eb-garamond);font-weight:400;font-size:26px;line-height:1.1;letter-spacing:-.02em;margin-bottom:8px}
+  .edu-card .e-deg{font-size:15px;color:var(--color-charcoal);margin-bottom:14px;line-height:1.4}
+  .edu-meta{display:flex;justify-content:space-between;border-top:1px solid var(--color-stone-mist);padding-top:14px;font-size:14px;color:var(--color-smoke)}
+  .edu-meta b{color:var(--color-midnight-ink)}
+  .side-projects{margin-top:24px}
+  .sp-item{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--color-stone-mist);font-size:15px}
+  .sp-item:last-child{border-bottom:none}
+  .sp-item .sp-name{font-weight:600}
+  .sp-item .sp-desc{color:var(--color-smoke);font-size:13px;margin-top:3px}
+  .sp-item .sp-year{color:var(--color-graphite-veil);font-size:13px;white-space:nowrap}
+
+  /* ---------- Contact ---------- */
+  .contact{text-align:center}
+  .contact h2{font-family:var(--font-eb-garamond);font-weight:400;letter-spacing:-.04em;
+    font-size:clamp(40px,6vw,84px);line-height:.95;max-width:16ch;margin:0 auto}
+  .contact h2 .muted{color:var(--color-graphite-veil)}
+  .contact p{margin:26px auto 0;color:var(--color-smoke);font-size:18px;max-width:48ch}
+  .contact .actions{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--color-cream-paper);border-top:1px solid var(--color-stone-mist);padding:40px 24px}
+  .foot{max-width:var(--page);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:14px;color:var(--color-smoke)}
+  .foot a:hover{color:var(--color-midnight-ink)}
+  .foot .fl{display:flex;gap:22px}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .band{padding:64px 20px}
+    .xp-card{grid-template-columns:1fr;gap:28px;padding:28px}
+    .two-col{grid-template-columns:1fr;gap:40px}
+    .clients-grid{grid-template-columns:repeat(2,1fr)}
+    .orb{display:none}
+    .nav-links,.nav-cta .btn--ghost{display:none}
+  }
+  @media (max-width:520px){
+    .hero .meta{gap:16px}
+    .contact .actions,.hero .actions{flex-direction:column}
+    .btn{justify-content:center}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav-shell">
+  <nav>
+    <a class="brand" href="#top"><span class="mark">J</span> Jason&nbsp;Hartanto</a>
+    <div class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#freelance">Freelance</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn--ghost" href="mailto:Hartanto.jason@gmail.com">Email</a>
+      <a class="btn btn--primary" href="#contact">Get in touch</a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="band band--cream hero" id="top">
+  <!-- circular text orb -->
+  <div class="orb orb--spin" aria-hidden="true">
+    <svg viewBox="0 0 200 200" class="ring-text">
+      <defs><path id="circlePath" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+      <text fill="#8a8a80" font-family="Figtree,sans-serif" font-size="12.5" font-weight="600" letter-spacing="3">
+        <textPath href="#circlePath">FRONTEND · PAYMENTS · CRYPTO · ECOMMERCE · </textPath>
+      </text>
+      <circle cx="100" cy="100" r="8" fill="#ffa946"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span>Software Engineer · Bandung, Indonesia</span>
+    <h1><span class="muted">I ship interfaces people</span> <span class="hl">trust</span> with their&nbsp;money.</h1>
+    <p class="lede">Frontend-leaning software engineer with 5+ years building real-time crypto trading, payments infrastructure, and internal tooling at Pintu and OY! Indonesia — where correctness and speed aren't optional.</p>
+    <div class="actions">
+      <a class="btn btn--primary" href="#contact">Get in touch
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn--ghost" href="#experience">View experience</a>
+    </div>
+    <div class="meta">
+      <span><b>5+</b> years shipping production</span>
+      <span><b>2</b> fintech platforms</span>
+      <span><b>10+</b> freelance builds</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE (DARK) -->
+<section class="band band--dark" id="experience">
+  <div class="sec-head">
+    <span class="eyebrow"><span class="dot"></span>Experience</span>
+    <h2>Five years across crypto, payments, and mobile.</h2>
+    <p>From real-time trading to remittance rails and native iOS — building the parts of a product where money and trust are on the line.</p>
+  </div>
+
+  <div class="wrap xp">
+    <!-- Pintu -->
+    <article class="xp-card">
+      <div>
+        <div class="x-when">Jun 2024 — Present</div>
+        <h3><a href="https://pintu.co.id/pro" target="_blank" rel="noopener">Pintu <span class="ext">↗</span></a></h3>
+        <div class="x-role">Frontend Engineer</div>
+        <div class="x-sector">Crypto exchange · Pintu Pro</div>
+      </div>
+      <div>
+        <ul>
+          <li>Built and maintained spot &amp; futures trading features in Pintu Pro, including <b>isolated margin</b>, stop orders for perps, and off-chain send flows and addresses.</li>
+          <li>Improved web load performance with infinite pagination, filtering, search, and <b>list virtualization</b> for hundreds of crypto assets on the trade page.</li>
+          <li>Developed <b>Swap &amp; Transfer</b> (IDR straight into a USDT futures wallet) and a shareable profit-and-loss image generator.</li>
+          <li>Orchestrated WebSocket and REST data flows to keep prices in sync while cutting redundant API calls.</li>
+          <li>Guarded actions by KYC state and permissions, made maintenance messaging editable by non-engineers via Strapi, and built internal tools to control prices and transactions — plus the Pro landing page, SEO, and analytics.</li>
+        </ul>
+        <div class="stack">
+          <span class="t">Next.js</span><span class="t">TanStack Query</span><span class="t">Zustand</span><span class="t">Tailwind</span><span class="t">Amplitude</span><span class="t">SSE</span><span class="t">WebSocket</span><span class="t">Strapi</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- OY! -->
+    <article class="xp-card">
+      <div>
+        <div class="x-when">Feb 2022 — Jun 2024</div>
+        <h3><a href="https://www.oyindonesia.com" target="_blank" rel="noopener">OY! Indonesia <span class="ext">↗</span></a></h3>
+        <div class="x-role">Software Engineer</div>
+        <div class="x-sector">Payment aggregator</div>
+      </div>
+      <div>
+        <ul>
+          <li>Owned the recipient-name inquiry flow before disbursement — adding fallback logic, caching, and DB persistence to cut vendor cost and raise match rates.</li>
+          <li>Built end-to-end <b>International Remittance</b> disbursement and a customizable transaction receipt (custom header, palette, logo, footnote; export as JPEG/PDF or email).</li>
+          <li>Managed tiered and non-tiered admin-fee pricing (by frequency or volume) and a mobile web bulk-disbursement flow.</li>
+          <li>Integrated Firebase for dynamic config and built internal tools to bulk-update config and transaction status from ops-uploaded CSV/XLSX.</li>
+        </ul>
+        <div class="stack">
+          <span class="t">React</span><span class="t">Next.js</span><span class="t">Java Spring</span><span class="t">PostgreSQL</span><span class="t">Redis</span><span class="t">Elasticsearch</span><span class="t">Firebase</span><span class="t">Redux</span><span class="t">SWR</span><span class="t">Metabase</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Apple Academy -->
+    <article class="xp-card">
+      <div>
+        <div class="x-when">Feb 2021 — Dec 2021</div>
+        <h3><a href="https://developeracademy.apps.binus.ac.id/" target="_blank" rel="noopener">Apple Developer Academy <span class="ext">↗</span></a></h3>
+        <div class="x-role">iOS Developer</div>
+        <div class="x-sector">BINUS · Cohort program</div>
+      </div>
+      <div>
+        <ul>
+          <li>Built iOS apps with both MVC and MVVM, including <b>Board It</b>, an iPad app for learning and creating storyboards, with navigation and local storage.</li>
+          <li>Handled augmented reality for <b>Furney</b>, an iPhone app for 3D measurement and visual comparison between available space and furniture.</li>
+          <li>Owned data storage and a PDF generator for <b>Legalin</b>, an app that generates various legal documents.</li>
+        </ul>
+        <div class="stack">
+          <span class="t">Swift</span><span class="t">UIKit</span><span class="t">SwiftUI</span><span class="t">ARKit</span><span class="t">Core Data</span><span class="t">WKWebView</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- CLIENTS (TEAL) -->
+<section class="band band--teal" id="freelance">
+  <div class="sec-head">
+    <span class="eyebrow"><span class="dot"></span>Freelance &amp; studio work</span>
+    <h2>Shipping storefronts and tools for real businesses.</h2>
+    <p>A decade of side builds — e-commerce on WordPress &amp; Shopify, plus custom internal tools — delivered for studios and small businesses across Indonesia.</p>
+  </div>
+  <div class="wrap clients-grid">
+    <a class="client" href="https://reude.online/" target="_blank" rel="noopener">
+      <div class="c-shot"><img src="images/reude.jpg" alt="Reude website preview" loading="lazy"></div>
+      <div class="c-info"><span class="cn">Reude</span><span class="lk">↗</span></div>
+    </a>
+    <a class="client" href="https://sltcs.co/" target="_blank" rel="noopener">
+      <div class="c-shot"><img src="images/aesthletics.jpg" alt="Aesthletics website preview" loading="lazy"></div>
+      <div class="c-info"><span class="cn">Aesthletics</span><span class="lk">↗</span></div>
+    </a>
+    <a class="client" href="https://onesunday.studio/" target="_blank" rel="noopener">
+      <div class="c-shot"><img src="images/onesunday-studio.jpg" alt="One Sunday Studio website preview" loading="lazy"></div>
+      <div class="c-info"><span class="cn">One Sunday Studio</span><span class="lk">↗</span></div>
+    </a>
+    <a class="client" href="https://thesaltyspace.com/" target="_blank" rel="noopener">
+      <div class="c-shot"><img src="images/salty-space.png" alt="Salty Space website preview" loading="lazy"></div>
+      <div class="c-info"><span class="cn">Salty Space</span><span class="lk">↗</span></div>
+    </a>
+    <a class="client" href="https://goodmoments.co.id/" target="_blank" rel="noopener">
+      <div class="c-shot"><img src="images/goodmoments.jpg" alt="Goodmoments website preview" loading="lazy"></div>
+      <div class="c-info"><span class="cn">Goodmoments</span><span class="lk">↗</span></div>
+    </a>
+    <a class="client" href="https://akurasikonstruksiindonesia.com/" target="_blank" rel="noopener">
+      <div class="c-shot"><img src="images/akurasi-konstruksi.jpg" alt="Akurasi Konstruksi website preview" loading="lazy"></div>
+      <div class="c-info"><span class="cn">Akurasi Konstruksi</span><span class="lk">↗</span></div>
+    </a>
+    <a class="client" href="https://wearekyrra.com/" target="_blank" rel="noopener">
+      <div class="c-shot"><img src="images/wearekyrra.jpg" alt="WeAreKyrra website preview" loading="lazy"></div>
+      <div class="c-info"><span class="cn">WeAreKyrra</span><span class="lk">↗</span></div>
+    </a>
+    <a class="client" href="https://akhirhayat.studio/" target="_blank" rel="noopener">
+      <div class="c-shot"><img src="images/akhir-hayat-studio.jpg" alt="Akhir Hayat Studio website preview" loading="lazy"></div>
+      <div class="c-info"><span class="cn">Akhir Hayat Studio</span><span class="lk">↗</span></div>
+    </a>
+    <a class="client" href="https://playtimewonder.com/" target="_blank" rel="noopener">
+      <div class="c-shot"><img src="images/playtimewonder.jpg" alt="Playtimewonder website preview" loading="lazy"></div>
+      <div class="c-info"><span class="cn">Playtimewonder</span><span class="lk">↗</span></div>
+    </a>
+    <a class="client" href="https://akhirpekan.studio/" target="_blank" rel="noopener">
+      <div class="c-shot"><img src="images/akhir-pekan-studio.jpg" alt="Akhir Pekan Studio website preview" loading="lazy"></div>
+      <div class="c-info"><span class="cn">Akhir Pekan Studio</span><span class="lk">↗</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- SKILLS + EDUCATION (CREAM) -->
+<section class="band band--cream" id="skills">
+  <div class="two-col">
+    <div>
+      <div class="sec-head" style="margin-bottom:36px">
+        <span class="eyebrow"><span class="dot"></span>Toolkit</span>
+        <h2>What I build with.</h2>
+      </div>
+      <div class="skill-group">
+        <h4>Frontend</h4>
+        <div class="chips">
+          <span class="chip chip--fill">React</span><span class="chip chip--fill">Next.js</span><span class="chip">TypeScript</span><span class="chip">Tailwind</span><span class="chip">TanStack Query</span><span class="chip">Zustand</span><span class="chip">Redux</span><span class="chip">SWR</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Realtime &amp; data</h4>
+        <div class="chips">
+          <span class="chip">WebSocket</span><span class="chip">SSE</span><span class="chip">REST</span><span class="chip">Elasticsearch</span><span class="chip">Redis</span><span class="chip">PostgreSQL</span><span class="chip">Amplitude</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Backend &amp; platform</h4>
+        <div class="chips">
+          <span class="chip">Java Spring</span><span class="chip">Firebase</span><span class="chip">Strapi</span><span class="chip">Metabase</span><span class="chip">PHP</span><span class="chip">Shopify</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Mobile</h4>
+        <div class="chips">
+          <span class="chip">Swift</span><span class="chip">UIKit</span><span class="chip">SwiftUI</span><span class="chip">ARKit</span><span class="chip">Core Data</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="edu-card">
+        <span class="eyebrow" style="margin-bottom:16px"><span class="dot"></span>Education</span>
+        <h3>Bandung Institute of Technology</h3>
+        <div class="e-deg">Bachelor of Engineering — Information and System Technology</div>
+        <div class="edu-meta"><span>2017 — 2021</span><span>GPA <b>3.37</b> / 4.00</span></div>
+      </div>
+
+      <div class="side-projects">
+        <div class="sec-head" style="margin:32px 0 8px">
+          <h2 style="font-size:26px">Custom tools</h2>
+        </div>
+        <div class="sp-item">
+          <div>
+            <div class="sp-name">Planetcomputer</div>
+            <div class="sp-desc">Internal tool tracking computer-service transactions across three branches, with receipt export and customer order tracking. Vanilla PHP + Bootstrap.</div>
+          </div>
+          <div class="sp-year">2022</div>
+        </div>
+        <div class="sp-item">
+          <div>
+            <div class="sp-name">Datalogue</div>
+            <div class="sp-desc">A portal for a centralized public archive at ITB, built with the Ministry of Creative Communication and Information. Next.js, Strapi, React MUI.</div>
+          </div>
+          <div class="sp-year">2021</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT (DARK) -->
+<section class="band band--dark contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow" style="margin-bottom:24px"><span class="dot"></span>Get in touch</span>
+    <h2><span class="muted">Have something</span> worth building?</h2>
+    <p>I'm open to frontend and full-stack roles, plus select freelance builds.</p>
+    <div class="actions">
+      <a class="btn btn--primary" href="mailto:Hartanto.jason@gmail.com">Hartanto.jason@gmail.com
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn--ghost" href="https://wa.me/6289658375049" target="_blank" rel="noopener">+62 896 5837 5049</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <span>© 2026 Jason Alfian Hartanto — Software Engineer</span>
+    <div class="fl">
+      <a href="mailto:Hartanto.jason@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/jason-alfian-hartanto-a54486189/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+      <a href="CV_ATS_JasonAlfianHartanto_2026.pdf" download>Download CV</a>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
