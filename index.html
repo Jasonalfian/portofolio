@@ -3,8 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jason Alfian Hartanto — Software Engineer</title>
-<meta name="description" content="Software engineer with 5+ years building trading, payments, and internal tooling at Pintu and OY! Indonesia.">
+<title>Jason Alfian Hartanto — Senior Software Engineer</title>
+<meta name="description" content="Senior software engineer with 5+ years building insurance, crypto trading, and payments products at BJAK, Pintu, and OY! Indonesia.">
+<link rel="canonical" href="https://jasonalfian.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jasonalfian.com/">
+<meta property="og:site_name" content="Jason Alfian Hartanto">
+<meta property="og:title" content="Jason Alfian Hartanto — Senior Software Engineer">
+<meta property="og:description" content="Senior software engineer with 5+ years building insurance, crypto trading, and payments products at BJAK, Pintu, and OY! Indonesia.">
+<meta property="og:image" content="https://jasonalfian.com/images/og-home.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jason Alfian Hartanto — portfolio homepage">
+<meta name="twitter:card" content="summary_large_image">
+<script>document.documentElement.classList.add('js')</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%231a1a1a'/%3E%3Ctext x='32' y='45' font-family='Georgia,%20Times%20New%20Roman,%20serif' font-size='36' fill='%23ffffff' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,8 +32,9 @@
     --color-charcoal:#222222;
     --color-charcoal-mist:#333333;
     --color-deep-forest-teal:#034f46;
-    --color-lavender-whisper:#f0d7ff;
+    --color-apricot-glow:#ffd6a0;
     --color-amber-pulse:#ffa946;
+    --color-signal-green:#0cce6b;
 
     --font-figtree:'Figtree',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
     --font-eb-garamond:'EB Garamond',Georgia,'Times New Roman',serif;
@@ -33,6 +46,7 @@
     --radius-full:1000px;
 
     --page:1200px;
+    --ease:cubic-bezier(.2,.7,.2,1);
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -82,15 +96,16 @@
     display:inline-flex;align-items:center;gap:8px;
     font-family:var(--font-figtree);font-weight:600;font-size:15px;
     border-radius:var(--radius-xl);padding:12px 20px;cursor:pointer;
-    border:1px solid transparent;transition:transform .18s ease,background .18s ease,color .18s ease;
+    border:1px solid transparent;transition:transform .18s ease,background .18s ease,color .18s ease,translate .25s var(--ease);
     white-space:nowrap;
   }
   .btn:hover{transform:translateY(-2px)}
-  .btn--primary{background:var(--color-lavender-whisper);color:var(--color-midnight-ink);border-color:var(--color-midnight-ink)}
+  .btn--primary{background:var(--color-apricot-glow);color:var(--color-midnight-ink);border-color:var(--color-midnight-ink)}
   .btn--ghost{background:transparent;color:var(--color-midnight-ink);border-color:var(--color-midnight-ink)}
   .band--dark .btn--ghost{color:#fff;border-color:rgba(255,255,255,.55)}
   .band--dark .btn--ghost:hover{background:rgba(255,255,255,.08)}
-  .btn svg{width:16px;height:16px}
+  .btn svg{width:16px;height:16px;transition:translate .2s var(--ease)}
+  .btn:hover svg{translate:3px 0}
 
   /* ---------- Nav ---------- */
   header.nav-shell{position:sticky;top:16px;z-index:50;padding:0 24px;margin-top:16px}
@@ -102,6 +117,7 @@
     box-shadow:0 2px 8px rgba(0,0,0,.08);
     display:flex;align-items:center;justify-content:space-between;
     padding:10px 12px 10px 18px;
+    position:relative;overflow:hidden;
   }
   .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px}
   .brand .mark{
@@ -110,15 +126,25 @@
     font-family:var(--font-eb-garamond);font-size:18px;line-height:1
   }
   .nav-links{display:flex;gap:26px;align-items:center}
-  .nav-links a{font-size:14px;font-weight:500;color:var(--color-midnight-ink);opacity:.85;transition:opacity .15s}
-  .nav-links a:hover{opacity:1}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--color-midnight-ink);opacity:.85;transition:opacity .15s,background-size .3s var(--ease);
+    padding-bottom:3px;background:linear-gradient(var(--color-amber-pulse),var(--color-amber-pulse)) 0 100%/0 2px no-repeat}
+  .nav-links a:hover,.nav-links a.on{opacity:1;background-size:100% 2px}
   .nav-cta{display:flex;gap:10px;align-items:center}
   .nav-toggle{display:none}
 
   /* ---------- Hero ---------- */
   .hero{position:relative;text-align:center;padding-top:80px;padding-bottom:80px}
   .hero .wrap{position:relative;z-index:2}
+  /* cursor glow + dot grid that only shows around the pointer */
+  .hero::before,.hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s}
+  .hero::before{background:radial-gradient(520px circle at var(--mx,50%) var(--my,40%),rgba(255,214,160,.7),transparent 70%)}
+  .hero::after{
+    background:radial-gradient(rgba(26,26,26,.28) 1px,transparent 1.6px) 0 0/22px 22px;
+    mask-image:radial-gradient(260px circle at var(--mx,50%) var(--my,40%),#000,transparent);
+  }
+  .hero:hover::before,.hero:hover::after{opacity:1}
   .hero .eyebrow{margin-bottom:26px}
+  .loc::before{content:"·";margin-right:8px}
   .hero h1{
     font-family:var(--font-eb-garamond);font-weight:400;
     font-size:clamp(44px,7.2vw,96px);line-height:.95;letter-spacing:-.04em;
@@ -128,8 +154,19 @@
   .hl{position:relative;white-space:nowrap;z-index:1}
   .hl::after{
     content:"";position:absolute;left:-4px;right:-4px;bottom:.1em;height:.28em;
-    background:var(--color-lavender-whisper);border-radius:4px;z-index:-1;
+    background:var(--color-apricot-glow);border-radius:4px;z-index:-1;
+    transform-origin:left;animation:sweep .8s var(--ease) 1s both;
   }
+  /* rotating last word: all words share one grid cell, JS animates the width */
+  .rot{display:inline-grid;justify-items:start;transition:width .6s var(--ease)}
+  .rot>span{grid-area:1/1;opacity:0;translate:0 .4em;filter:blur(8px);transition:opacity .5s,translate .6s var(--ease),filter .5s}
+  .rot>span.on{opacity:1;translate:0;filter:none}
+  .rot>span.out{translate:0 -.4em}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .hero .lede,.hero .actions,.hero .meta{animation:rise .9s var(--ease) .5s both}
+  .hero .actions{animation-delay:.65s}
+  .hero .meta{animation-delay:.8s}
+  .hero .meta b{font-variant-numeric:tabular-nums}
   .hero p.lede{
     font-size:19px;line-height:1.45;color:var(--color-smoke);
     max-width:56ch;margin:28px auto 0;
@@ -163,7 +200,17 @@
     background:var(--color-charcoal);border:1px solid var(--color-charcoal-mist);
     border-radius:var(--radius-3xl);padding:36px;
     display:grid;grid-template-columns:270px 1fr;gap:40px;color:var(--color-white);
+    position:relative;isolation:isolate;transition:border-color .3s;
   }
+  .xp-card::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
+    background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(255,169,70,.1),transparent 45%);
+    opacity:0;transition:opacity .3s;
+  }
+  .xp-card:hover{border-color:rgba(255,169,70,.3)}
+  .xp-card:hover::before{opacity:1}
+  .now{display:inline-flex;align-items:center;gap:6px;margin-left:10px;color:var(--color-signal-green)}
+  .now i{width:7px;height:7px;border-radius:50%;background:var(--color-signal-green);animation:ping 1.8s infinite}
   .xp-card .x-when{font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.55)}
   .xp-card h3{font-family:var(--font-eb-garamond);font-weight:400;font-size:30px;line-height:1.05;letter-spacing:-.02em;margin:10px 0 6px;color:#fff}
   .xp-card h3 a{transition:color .15s}
@@ -185,8 +232,14 @@
     display:block;background:var(--color-deep-forest-teal);
     border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-xl);overflow:hidden;
     cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+    position:relative;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
   }
-  .client:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.28);border-color:rgba(255,255,255,.35)}
+  .client:hover{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.28);border-color:rgba(255,255,255,.35)}
+  .client::after{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .25s;
+    background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.22),transparent 55%);
+  }
+  .client:hover::after{opacity:1}
   .c-shot{aspect-ratio:4/3;overflow:hidden;background:#046056}
   .c-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .35s ease}
   .client:hover .c-shot img{transform:scale(1.045)}
@@ -201,8 +254,11 @@
   .skill-group{margin-bottom:28px}
   .skill-group h4{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--color-smoke);margin-bottom:14px}
   .chips{display:flex;flex-wrap:wrap;gap:9px}
-  .chip{border:1px solid var(--color-midnight-ink);border-radius:var(--radius-full);padding:9px 16px;font-size:14px;font-weight:500}
+  .chip{border:1px solid var(--color-midnight-ink);border-radius:var(--radius-full);padding:9px 16px;font-size:14px;font-weight:500;
+    cursor:default;transition:transform .25s var(--ease),background .2s,color .2s}
   .chip--fill{background:var(--color-midnight-ink);color:#fff}
+  .chip:hover{background:var(--color-apricot-glow);color:var(--color-midnight-ink);transform:translateY(-3px) rotate(-3deg)}
+  .chip:nth-child(even):hover{transform:translateY(-3px) rotate(3deg)}
   .edu-card{background:var(--color-white);border:1px solid var(--color-stone-mist);border-radius:var(--radius-3xl);padding:32px}
   .edu-card h3{font-family:var(--font-eb-garamond);font-weight:400;font-size:26px;line-height:1.1;letter-spacing:-.02em;margin-bottom:8px}
   .edu-card .e-deg{font-size:15px;color:var(--color-charcoal);margin-bottom:14px;line-height:1.4}
@@ -222,7 +278,30 @@
   .contact h2 .muted{color:var(--color-graphite-veil)}
   .contact p{margin:26px auto 0;color:var(--color-smoke);font-size:18px;max-width:48ch}
   .contact .actions{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+  .sq{position:relative;white-space:nowrap}
+  .sq svg{position:absolute;left:0;bottom:-.14em;width:100%;height:.24em;overflow:visible;transition:clip-path 1s var(--ease) .7s}
+  .sq path{fill:none;stroke:var(--color-amber-pulse);stroke-width:3;stroke-linecap:round}
+  .js .sq svg{clip-path:inset(0 100% 0 0)}
+  .js .go .sq svg{clip-path:inset(0)}
 
+  /* ---------- Motion ---------- */
+  .js .rv:not(.in){opacity:0}
+  .rv.in{animation:rise .9s var(--ease) var(--d,0s) both}
+  .js [data-split] .w{animation:word .9s var(--ease) calc(var(--i) * 60ms) both paused}
+  .js [data-split] .w:not(.rot){display:inline-block}
+  .js [data-split].go .w{animation-play-state:running}
+  @keyframes rise{from{opacity:0;translate:0 28px}}
+  @keyframes word{from{opacity:0;translate:0 .45em;filter:blur(8px)}}
+  @keyframes sweep{from{transform:scaleX(0)}}
+  @keyframes grow{to{transform:none}}
+  @keyframes ping{from{box-shadow:0 0 0 0 rgba(12,206,107,.6)}to{box-shadow:0 0 0 8px rgba(12,206,107,0)}}
+  @keyframes turn{to{rotate:1turn}}
+  /* scroll-linked extras where supported: nav progress bar + orb spin */
+  @supports (animation-timeline:scroll()){
+    nav::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--color-amber-pulse);
+      transform:scaleX(0);transform-origin:left;animation:grow linear both;animation-timeline:scroll(root)}
+    .orb--spin{animation:turn linear both;animation-timeline:scroll(root)}
+  }
   /* ---------- Footer ---------- */
   footer{background:var(--color-cream-paper);border-top:1px solid var(--color-stone-mist);padding:40px 24px}
   .foot{max-width:var(--page);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:14px;color:var(--color-smoke)}
@@ -240,12 +319,15 @@
   }
   @media (max-width:520px){
     .hero .meta{gap:16px}
+    .hero .eyebrow{flex-wrap:wrap;justify-content:center}
+    .loc{flex-basis:100%}
+    .loc::before{display:none}
     .contact .actions,.hero .actions{flex-direction:column}
     .btn{justify-content:center}
   }
 
   @media (prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important;scroll-behavior:auto}
+    *,::before,::after{animation:none!important;transition:none!important;scroll-behavior:auto}
   }
 </style>
 </head>
@@ -275,15 +357,15 @@
     <svg viewBox="0 0 200 200" class="ring-text">
       <defs><path id="circlePath" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
       <text fill="#8a8a80" font-family="Figtree,sans-serif" font-size="12.5" font-weight="600" letter-spacing="3">
-        <textPath href="#circlePath">FRONTEND · PAYMENTS · CRYPTO · ECOMMERCE · </textPath>
+        <textPath href="#circlePath">FRONTEND · FULLSTACK · INSURTECH · FINTECH · </textPath>
       </text>
       <circle cx="100" cy="100" r="8" fill="#ffa946"/>
     </svg>
   </div>
   <div class="wrap">
-    <span class="eyebrow"><span class="dot"></span>Software Engineer · Bandung, Indonesia</span>
-    <h1><span class="muted">I ship interfaces people</span> <span class="hl">trust</span> with their&nbsp;money.</h1>
-    <p class="lede">Frontend-leaning software engineer with 5+ years building real-time crypto trading, payments infrastructure, and internal tooling at Pintu and OY! Indonesia — where correctness and speed aren't optional.</p>
+    <span class="eyebrow"><span class="dot"></span>Senior Software Engineer<span class="loc">Bandung, Indonesia</span></span>
+    <h1 data-split><span class="muted">I ship interfaces people</span> <span class="hl u">trust</span> with their <span class="sr">money.</span><span class="rot u" aria-hidden="true"><span class="on">money.</span><span>insurance.</span><span>trades.</span><span>payments.</span></span></h1>
+    <p class="lede">Frontend-first, full-stack software engineer with 5+ years building insurance, real-time crypto trading, and payments products at BJAK, Pintu, and OY! Indonesia — where correctness and speed aren't optional.</p>
     <div class="actions">
       <a class="btn btn--primary" href="#contact">Get in touch
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -291,9 +373,9 @@
       <a class="btn btn--ghost" href="#experience">View experience</a>
     </div>
     <div class="meta">
-      <span><b>5+</b> years shipping production</span>
-      <span><b>2</b> fintech platforms</span>
-      <span><b>10+</b> freelance builds</span>
+      <span><b data-count>5+</b> years shipping production</span>
+      <span><b data-count>3</b> fintech &amp; insurtech platforms</span>
+      <span><b data-count>10+</b> freelance builds</span>
     </div>
   </div>
 </section>
@@ -302,15 +384,35 @@
 <section class="band band--dark" id="experience">
   <div class="sec-head">
     <span class="eyebrow"><span class="dot"></span>Experience</span>
-    <h2>Five years across crypto, payments, and mobile.</h2>
-    <p>From real-time trading to remittance rails and native iOS — building the parts of a product where money and trust are on the line.</p>
+    <h2>Five years across insurance, crypto, payments, and mobile.</h2>
+    <p>From insurance and real-time trading to remittance rails and native iOS — building the parts of a product where money and trust are on the line.</p>
   </div>
 
   <div class="wrap xp">
+    <!-- BJAK -->
+    <article class="xp-card">
+      <div>
+        <div class="x-when">Aug 2026 — Present <span class="now"><i></i>Now</span></div>
+        <h3><a href="https://bjak.my" target="_blank" rel="noopener">BJAK <span class="ext">↗</span></a></h3>
+        <div class="x-role">Senior Software Engineer</div>
+        <div class="x-sector">Insurance · Malaysia team</div>
+      </div>
+      <div>
+        <ul>
+          <li>Develop and maintain <b>bjak.my</b>, BJAK's Malaysian insurance site — frontend-first, with full-stack work across Node.js services and MongoDB.</li>
+          <li>Lifted the site's average Google PageSpeed <b>performance score from 55 to 95</b> and brought <b>SEO to 100</b>.</li>
+          <li>Build pages in Next.js with SSG and SSR where each fits, TanStack Query for data fetching, and Tailwind for UI.</li>
+        </ul>
+        <div class="stack">
+          <span class="t">Next.js</span><span class="t">TanStack Query</span><span class="t">Tailwind</span><span class="t">SSG / SSR</span><span class="t">Node.js</span><span class="t">MongoDB</span>
+        </div>
+      </div>
+    </article>
+
     <!-- Pintu -->
     <article class="xp-card">
       <div>
-        <div class="x-when">Jun 2024 — Present</div>
+        <div class="x-when">Jun 2024 — Jun 2026</div>
         <h3><a href="https://pintu.co.id/pro" target="_blank" rel="noopener">Pintu <span class="ext">↗</span></a></h3>
         <div class="x-role">Frontend Engineer</div>
         <div class="x-sector">Crypto exchange · Pintu Pro</div>
@@ -434,23 +536,24 @@
       <div class="sec-head" style="margin-bottom:36px">
         <span class="eyebrow"><span class="dot"></span>Toolkit</span>
         <h2>What I build with.</h2>
+        <p>Filled chips are my day-to-day stack at BJAK.</p>
       </div>
       <div class="skill-group">
         <h4>Frontend</h4>
         <div class="chips">
-          <span class="chip chip--fill">React</span><span class="chip chip--fill">Next.js</span><span class="chip">TypeScript</span><span class="chip">Tailwind</span><span class="chip">TanStack Query</span><span class="chip">Zustand</span><span class="chip">Redux</span><span class="chip">SWR</span>
+          <span class="chip chip--fill">Next.js</span><span class="chip chip--fill">React</span><span class="chip chip--fill">TanStack Query</span><span class="chip chip--fill">Tailwind</span><span class="chip chip--fill">SSG / SSR</span><span class="chip">TypeScript</span><span class="chip">Zustand</span><span class="chip">Redux</span><span class="chip">SWR</span>
         </div>
       </div>
       <div class="skill-group">
         <h4>Realtime &amp; data</h4>
         <div class="chips">
-          <span class="chip">WebSocket</span><span class="chip">SSE</span><span class="chip">REST</span><span class="chip">Elasticsearch</span><span class="chip">Redis</span><span class="chip">PostgreSQL</span><span class="chip">Amplitude</span>
+          <span class="chip chip--fill">MongoDB</span><span class="chip">WebSocket</span><span class="chip">SSE</span><span class="chip">REST</span><span class="chip">Elasticsearch</span><span class="chip">Redis</span><span class="chip">PostgreSQL</span><span class="chip">Amplitude</span>
         </div>
       </div>
       <div class="skill-group">
         <h4>Backend &amp; platform</h4>
         <div class="chips">
-          <span class="chip">Java Spring</span><span class="chip">Firebase</span><span class="chip">Strapi</span><span class="chip">Metabase</span><span class="chip">PHP</span><span class="chip">Shopify</span>
+          <span class="chip chip--fill">Node.js</span><span class="chip">Java Spring</span><span class="chip">Firebase</span><span class="chip">Strapi</span><span class="chip">Metabase</span><span class="chip">PHP</span><span class="chip">Shopify</span>
         </div>
       </div>
       <div class="skill-group">
@@ -496,7 +599,7 @@
 <section class="band band--dark contact" id="contact">
   <div class="wrap">
     <span class="eyebrow" style="margin-bottom:24px"><span class="dot"></span>Get in touch</span>
-    <h2><span class="muted">Have something</span> worth building?</h2>
+    <h2 data-split><span class="muted">Have something</span> worth <span class="sq u">building?<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8 C 18 2, 30 12, 50 7 S 80 3, 98 7" vector-effect="non-scaling-stroke"/></svg></span></h2>
     <p>I'm open to frontend and full-stack roles, plus select freelance builds.</p>
     <div class="actions">
       <a class="btn btn--primary" href="mailto:hartanto.jason@gmail.com">hartanto.jason@gmail.com
@@ -509,7 +612,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="foot">
-    <span>© 2026 Jason Alfian Hartanto — Software Engineer</span>
+    <span>© 2026 Jason Alfian Hartanto — Senior Software Engineer</span>
     <div class="fl">
       <a href="mailto:hartanto.jason@gmail.com">Email</a>
       <a href="https://www.linkedin.com/in/jason-alfian-hartanto-a54486189/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
@@ -518,6 +621,96 @@
     </div>
   </div>
 </footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $$ = s => document.querySelectorAll(s);
+
+  // wrap each word (or .u unit) in a .w span with a stagger index
+  const split = root => {
+    let i = 0;
+    const walk = node => [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) n.replaceWith(...n.textContent.split(/(\s+)/).filter(Boolean).map(s => {
+        if (!s.trim()) return s;
+        const w = document.createElement('span');
+        w.className = 'w';
+        w.textContent = s;
+        w.style.setProperty('--i', i++);
+        return w;
+      }));
+      else if (n.classList?.contains('u')) { n.classList.add('w'); n.style.setProperty('--i', i++); }
+      else if (n.nodeType === 1) walk(n);
+    });
+    walk(root);
+  };
+
+  // one observer: run each element's callback once, when it scrolls into view
+  const fns = new Map();
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    io.unobserve(e.target);
+    fns.get(e.target)();
+  }), { rootMargin: '0px 0px -10% 0px' });
+  const onView = (el, fn) => { fns.set(el, fn); io.observe(el); };
+
+  $$('[data-split]').forEach(el => { split(el); onView(el, () => el.classList.add('go')); });
+  $$('.client').forEach((el, i) => el.style.setProperty('--d', i % 3 * 90 + 'ms'));
+  $$('.sec-head, .xp-card, .client, .skill-group, .edu-card, .sp-item, .contact p, .contact .actions').forEach(el => {
+    el.classList.add('rv');
+    onView(el, () => el.classList.add('in'));
+  });
+
+  // hero stats count up from 0 (ease-out)
+  if (!reduce) $$('[data-count]').forEach(el => {
+    const [, n, rest] = el.textContent.match(/(\d+)(.*)/);
+    let t0;
+    const f = t => {
+      t0 ??= t;
+      const p = Math.min((t - t0) / 1500, 1);
+      el.textContent = Math.round(n * (1 - (1 - p) ** 3)) + rest;
+      if (p < 1) requestAnimationFrame(f);
+    };
+    el.textContent = 0 + rest;
+    setTimeout(() => requestAnimationFrame(f), 600);
+  });
+
+  // hero: rotate the last word, resizing its slot so the line re-centres smoothly
+  const rot = document.querySelector('.rot'), words = [...rot.children];
+  let k = 0;
+  const fit = () => rot.style.width = words[k].offsetWidth + 'px';
+  document.fonts.ready.then(fit);
+  addEventListener('resize', fit);
+  if (!reduce) setInterval(() => {
+    words.forEach(w => w.classList.remove('out'));
+    words[k].classList.replace('on', 'out');
+    words[k = (k + 1) % words.length].classList.add('on');
+    fit();
+  }, 2600);
+
+  // pointer effects (mouse only): spotlight, card tilt, magnetic buttons
+  const track = (sel, fn) => $$(sel).forEach(el => {
+    el.addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      const r = el.getBoundingClientRect();
+      fn(el.style, (e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height);
+    });
+    el.addEventListener('pointerleave', () => fn(el.style, .5, .5));
+  });
+  track('.hero, .xp-card, .client', (s, x, y) => { s.setProperty('--mx', x * 100 + '%'); s.setProperty('--my', y * 100 + '%'); });
+  if (!reduce) {
+    track('.client', (s, x, y) => { s.setProperty('--rx', (.5 - y) * 10 + 'deg'); s.setProperty('--ry', (x - .5) * 12 + 'deg'); });
+    track('.btn', (s, x, y) => s.translate = `${(x - .5) * 12}px ${(y - .5) * 10}px`);
+  }
+
+  // highlight the nav link for the section in the middle of the viewport
+  const links = $$('.nav-links a');
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.hash === '#' + e.target.id));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  $$('section[id]').forEach(s => spy.observe(s));
+})();
+</script>
 
 </body>
 </html>
